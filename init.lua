@@ -6,6 +6,7 @@ module.filepath = os.getenv('HOME') .. '/.vis-mru'
 module.vis_menu_path = "vis-menu"
 module.vis_menu_args = "-l 10"
 module.history = 20
+module.exclude = {".git/COMMIT_EDITMSG"}
 
 function read_mru()
 	local mru = {}
@@ -28,6 +29,10 @@ function write_mru(win)
 	if file_path == nil then return end
 	--- Check duplicates
 	if file_path == mru[1] then return end
+	--- Exclude files
+	for i,excl in ipairs(module.exclude) do
+		if string.match(file_path, excl) then return end
+	end
 	local f = io.open(module.filepath, 'w+')
 	if f == nil then return end
 	table.insert(mru, 1, file_path)

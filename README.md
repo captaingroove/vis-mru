@@ -27,6 +27,8 @@ plugin_vis_mru.filepath = os.getenv("HOME") .. "/.vis-mru"
 -- The number of most recently used files kept in history (default: 20)
 plugin_vis_mru.history = 60
 
+-- Files to exclude base on substring matching (default: {".git/COMMIT_EDITMSG"})
+
 -- Mapping configuration example (<Space>f)
 vis.events.subscribe(vis.events.INIT, function()
     vis:map(vis.modes.NORMAL, " f", ":mru<Enter>", "most recent files")
